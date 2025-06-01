@@ -1,0 +1,54 @@
+image: python:3.12
+
+stages:
+  - lint
+  - test
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+
+before_script:
+  - python -m pip install --upgrade pip # на всякий случай
+  - pip install -r requirements.txt
+
+
+workflow:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_PIPELINE_SOURCE == "push"'
+
+# Тестирование
+unittest:
+  stage: test
+  script:
+    - pytest hw/
+
+# Линтинг
+flake8:
+  stage: lint
+  script:
+    - flake8 hw/
+
+
+mypy:
+  stage: lint
+  script:
+    - cd hw  # Переходим в папку hw
+    - mypy app.py
+    - mypy conftest.py
+    - mypy models.py
+    - mypy test_flask.py
+
+
+
+black:
+  stage: lint
+  script:
+    - black --diff --check hw/
+
+
+isort:
+  stage: lint
+  script:
+    - isort --check-only hw/
+

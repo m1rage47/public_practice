@@ -39,8 +39,7 @@ jobs:
       - name: 🧠 Type check with mypy
         run: |
           source venv/bin/activate
-          cd hw
-          mypy .
+          mypy hw
 
       - name: 🎨 Check code formatting with black
         run: |

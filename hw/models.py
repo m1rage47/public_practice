@@ -6,7 +6,7 @@ from sqlalchemy import UniqueConstraint
 db: SQLAlchemy = SQLAlchemy()
 
 
-class Client(db.Model):
+class Client(db.Model):  # type: ignore
     __tablename__ = "client"
 
     id = db.Column(db.Integer, primary_key=True, index=True)

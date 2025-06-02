@@ -34,7 +34,7 @@ class Client(db.Model):  # type: ignore[name-defined]
         return f"<Client id={self.id} name={self.name} {self.surname}>"
 
 
-class Parking(db.Model):
+class Parking(db.Model):  # type: ignore[name-defined]
     __tablename__ = "parking"
 
     id = db.Column(db.Integer, primary_key=True, index=True)
@@ -60,7 +60,7 @@ class Parking(db.Model):
         return f"<Parking id={self.id} address={self.address} opened={self.opened}>"
 
 
-class ClientParking(db.Model):
+class ClientParking(db.Model):  # type: ignore[name-defined]
     __tablename__ = "client_parking"
 
     id = db.Column(db.Integer, primary_key=True, index=True)
